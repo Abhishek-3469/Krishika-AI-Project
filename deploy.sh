@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Harit Digi - Agricultural AI Platform
+# Krishika AI - Agricultural AI Platform
 
 
-echo "🌾 Harit Digi - Agricultural AI Platform"
+echo "🌾 Krishika AI - Agricultural AI Platform"
 echo "🏆 SIH Competition Ready"
 echo "========================================"
 

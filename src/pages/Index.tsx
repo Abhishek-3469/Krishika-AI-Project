@@ -111,7 +111,7 @@ const Index = () => {
               Smart Farming, Better Harvests - Empowering Indian farmers with AI technology
             </p>
             <div className="text-sm text-muted-foreground">
-              © 2024 Krishika. Made with ❤️ for Indian farmers.
+              © 2026 Krishika. Made with ❤️ for Indian farmers.
             </div>
           </div>
         </div>

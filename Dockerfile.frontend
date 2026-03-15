@@ -1,4 +1,4 @@
-# Harit Digi Frontend - Agricultural AI Platform
+# Krishika AI Frontend - Agricultural AI Platform
 FROM node:18-alpine
 
 # Set working directory

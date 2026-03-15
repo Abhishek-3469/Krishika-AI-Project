@@ -1,8 +1,8 @@
 @echo off
-REM Harit Digi - Agricultural AI Platform
+REM KrishikaAI - Agricultural AI Platform
 REM 
 
-echo 🌾 Harit Digi - Agricultural AI Platform
+echo 🌾 Krishika AI - Agricultural AI Platform
 echo 🏆 SIH Competition Ready
 echo ========================================
 

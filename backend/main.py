@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Harit Digi - Agricultural AI Platform",
+    title="Krishika AI - Agricultural AI Platform",
     description="Specialized AI models for crop disease detection, soil analysis, and regional language support",
     version="1.0.0",
     docs_url="/docs",
@@ -46,7 +46,7 @@ model_status = {
 async def root():
     """Root endpoint with API information"""
     return {
-        "message": "Harit Digi - Agricultural AI Platform",
+        "message": "Krishika AI - Agricultural AI Platform",
         "version": "1.0.0",
         "models": model_status,
         "features": [

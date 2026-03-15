@@ -1,4 +1,4 @@
-# Harit Digi Backend - Agricultural AI Platform
+# Krishika AI Backend - Agricultural AI Platform
 FROM python:3.9-slim
 
 # Set working directory

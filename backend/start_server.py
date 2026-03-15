@@ -30,7 +30,7 @@ def setup_environment():
     os.environ.setdefault("PYTHONPATH", str(Path(__file__).parent))
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     
-    cache_dir = Path.home() / ".cache" / "harit-digi-models"
+    cache_dir = Path.home() / ".cache" / "krishika-ai-models"
     cache_dir.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("TRANSFORMERS_CACHE", str(cache_dir))
     
@@ -39,7 +39,7 @@ def setup_environment():
 def start_server():
     """Start the FastAPI server"""
     try:
-        logger.info("🚀 Starting Harit Digi - Agricultural AI Platform")
+        logger.info("🚀 Starting Krishika AI - Agricultural AI Platform")
         logger.info("🌱 Specialized models for SIH competition")
         logger.info("📊 Model accuracies:")
         logger.info("   - Disease Detection: 87.5%")
@@ -65,7 +65,7 @@ def start_server():
 def main():
     """Main startup function"""
     print("=" * 60)
-    print("🌾 HARIT DIGI - AGRICULTURAL AI PLATFORM")
+    print("🌾 KRISHIKA AI - AGRICULTURAL AI PLATFORM")
     print("🏆 COMPETITION READY")
     print("=" * 60)
     

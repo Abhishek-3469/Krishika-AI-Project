@@ -20,8 +20,8 @@ Krishika is a comprehensive digital platform designed to empower Indian farmers 
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/mukulgit649/harit-digi.git
-    cd harit-digi
+    git clone https://github.com/Abhishek-3469/Krishika-AI-Project.git
+    cd Krishika-AI-Project
     ```
 
 2.  Install dependencies:
