@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Send, X, Bot, User, Globe } from 'lucide-react';
+import { MessageCircle, Send, X, Bot, User, Globe, Mic } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -19,6 +19,8 @@ const AIChatbot = () => {
   const [inputText, setInputText] = useState('');
   const [currentLanguage, setCurrentLanguage] = useState('english');
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+const recognitionRef = useRef<any>(null);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -195,6 +197,81 @@ Please respond in ${
     }
   };
 
+  // @ts-ignore
+const startListening = () => {
+  const SpeechRecognition =
+    (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Speech Recognition not supported");
+    return;
+  }
+
+  // अगर mic already ON है → OFF कर दो
+  if (isListening && recognitionRef.current) {
+    recognitionRef.current.stop();
+    setIsListening(false);
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognitionRef.current = recognition;
+
+  recognition.lang =
+    currentLanguage === 'hindi' ? 'hi-IN' :
+    currentLanguage === 'telugu' ? 'te-IN' :
+    currentLanguage === 'odia' ? 'or-IN' :
+    'en-US';
+
+  recognition.start();
+  setIsListening(true);
+
+  recognition.onresult = async (event: any) => {
+    const speechText = event.results[0][0].transcript;
+
+    setInputText(speechText);
+
+    const userMessage = {
+      id: Date.now().toString(),
+      text: speechText,
+      sender: 'user',
+      timestamp: new Date(),
+      language: currentLanguage
+    };
+
+    setMessages((prev: any) => [...prev, userMessage]);
+    setIsTyping(true);
+
+    try {
+      const botReply = await getBotResponse(speechText);
+
+      const botMessage = {
+        id: (Date.now() + 1).toString(),
+        text: botReply,
+        sender: 'bot',
+        timestamp: new Date(),
+        language: currentLanguage
+      };
+
+      setMessages((prev: any) => [...prev, botMessage]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsTyping(false);
+      setIsListening(false);
+    }
+  };
+
+  recognition.onend = () => {
+    setIsListening(false);
+  };
+
+  recognition.onerror = (event: any) => {
+    console.error("Mic error:", event.error);
+    setIsListening(false);
+  };
+};
+
   return (
     <>
       {!isOpen && (
@@ -310,13 +387,21 @@ Please respond in ${
                   className="flex-1"
                 />
                 <Button
-                  onClick={handleSendMessage}
-                  disabled={!inputText.trim() || isTyping}
-                  size="sm"
-                  variant="hero"
-                >
-                  <Send className="w-4 h-4" />
-                </Button>
+  onClick={startListening}
+  size="sm"
+  variant={isListening ? "destructive" : "outline"}
+>
+  <Mic className={`w-4 h-4 ${isListening ? "animate-pulse" : ""}`} />
+</Button>
+
+<Button
+  onClick={handleSendMessage}
+  disabled={!inputText.trim() || isTyping}
+  size="sm"
+  variant="hero"
+>
+  <Send className="w-4 h-4" />
+</Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
                 {currentLanguage === 'hindi' ? 'AI से संचालित • हमेशा सीखता रहता है' :
